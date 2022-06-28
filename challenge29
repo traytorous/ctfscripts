@@ -1,0 +1,26 @@
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+
+void pwncollege(){
+    int mypid = fork();
+    int status;
+    char *binaryPath = "/challenge/embryoio_level29";
+    char *const args [] = {"/challenge/embryoio_level29",NULL};
+    if( 0 == mypid ){
+        printf( "This is the child process\n" );
+	execl(binaryPath,binaryPath,NULL);
+
+    }
+    else{
+        printf( "This is the parent\n" );
+	waitpid(mypid,&status,0);
+    }
+
+}
+int main()
+{
+    	pwncollege();
+	return( 0 );
+}
